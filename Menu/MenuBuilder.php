@@ -105,6 +105,7 @@ class MenuBuilder
                         'translation_domain' => $admin->getTranslationDomain(),
                         'admin'              => $admin,
                     );
+                    $menu[$name]->addChild($label, $options);
                 } else {
                     $label = $item['label'];
                     $options = array(
@@ -114,9 +115,10 @@ class MenuBuilder
                             'translation_domain' => $group['label_catalogue'],
                         ),
                     );
+                    
+                    $child = $menu[$name]->addChild($label, $options);
+                    $child->route = $item['route'];
                 }
-
-                $menu[$name]->addChild($label, $options);
             }
 
             if (0 === count($menu[$name]->getChildren())) {
