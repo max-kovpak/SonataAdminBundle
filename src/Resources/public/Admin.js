@@ -680,14 +680,16 @@ var Admin = {
     setup_form_submit: function(subject) {
         Admin.log('[core|setup_form_submit] setup form submit on', subject);
 
-        jQuery(subject).find('form').on('submit', function() {
-            var form = jQuery(this);
+        if (!window.SONATA_CONFIG || window.SONATA_CONFIG.DISABLE_FORM_BUTTONS) {
+            jQuery(subject).find('form').on('submit', function() {
+              var form = jQuery(this);
 
-            // this allows to submit forms and know which button was clicked
-            setTimeout(function() {
-                form.find('button').prop('disabled', true);
-            }, 1);
-        });
+              // this allows to submit forms and know which button was clicked
+              setTimeout(function() {
+                  form.find('button').prop('disabled', true);
+              }, 1);
+            });
+        }
     }
 };
 
